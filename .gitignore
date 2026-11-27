@@ -1,0 +1,5 @@
+.venv/
+models/
+luna.log
+__pycache__/
+*.wav

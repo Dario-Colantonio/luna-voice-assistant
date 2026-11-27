@@ -1,0 +1,111 @@
+audio:
+  sample_rate: 16000   # Hz; es el formato que esperan Vosk y Whisper
+  bloque: 4000         # muestras por bloque (0,25 s)
+
+wakeword:
+  modelo: models/vosk-model-small-es-0.42
+  frase: che luna
+
+voz:
+  modelo: models/es_AR-daniela-high.onnx
+  velocidad: 1.15
+  silencio_inicial: 1.0   # silencio antes de hablar
+  silencio_final: 0.4     # silencio después, para que no se corte el final
+
+
+
+grabacion:
+  umbral_voz: 350     # volumen mínimo para considerar que hablás
+  espera_inicio: 4.0  # segundos que espera a que empieces a hablar
+  silencio_fin: 1.0   # segundos de pausa que indican que terminaste
+  maximo: 8.0         # duración máxima del comando, en segundos
+  factor_ruido: 1.5   # cuánto debe superar la voz al ruido de fondo
+  depurar: false
+
+stt:
+  modelo: small
+  carpeta: models/whisper
+  idioma: es
+  prompt: >
+    Abrí Brave, abrí Spotify, buscá YouTube, pausá la música, poné la música,
+    siguiente canción, subí el volumen, bajá el volumen, poné el volumen al
+    cincuenta por ciento, silenciá el sonido, bajá el brillo, prendé el
+    Bluetooth, abrí Visual Studio Code, abrí Visual Studio Community,
+    abrí Visual Studio 2017, cerrá Visual Studio,
+    abrí Spotify y reproducí música,
+    apagá la computadora, cancelá el apagado,
+    cerrá Spotify, cerrá WhatsApp, cerrá Visual Studio Code,
+    cerrá Configuración, activá el Bluetooth, desactivá el Bluetooth.
+
+    
+pitido:
+  duracion: 0.4
+  volumen: 0.6
+  silencio_previo: 0.35    # silencio antes del pitido (despierta los auriculares)
+
+depurar: false
+
+
+
+apps:
+  alias:                                  # cómo lo decís -> cómo se llama en Windows
+    visual studio community: Visual Studio
+    visual studio 2026: Visual Studio
+    navegador: Brave
+    chrome: Google Chrome
+    vs code: Visual Studio Code
+    visual code: Visual Studio Code
+
+
+volumen:
+  paso: 10   # cuántos puntos sube o baja cuando no decís un número
+
+
+sitios:
+  youtube: https://www.youtube.com
+  gmail: https://mail.google.com
+  linkedin: https://www.linkedin.com
+
+
+
+ordenes:
+  espera_tras_abrir: 4   # segundos de espera tras abrir un programa, antes de la orden siguiente
+
+
+energia:
+  espera_apagado: 60   # segundos de aviso antes de apagar (se puede cancelar)
+
+
+cerrar:
+  espera: 3   # segundos que se espera a que un programa cierre antes de avisar
+  apps:
+    - decir: [spotify]
+      nombre: Spotify
+      proceso: Spotify.exe
+      forzar: true        # si queda en segundo plano, se termina
+    - decir: [whatsapp, wasap, guasap]
+      nombre: WhatsApp
+      proceso: WhatsApp.Root.exe
+      forzar: true
+    - decir: [visual studio code, vs code, visual code]
+      nombre: Visual Studio Code
+      proceso: Code.exe
+    - decir: [visual studio, visual studio community, visual studio 2026]
+      nombre: Visual Studio 2026
+      proceso: devenv.exe
+      ruta_contiene: '\18\'
+    - decir: [visual studio 2017]
+      nombre: Visual Studio 2017
+      proceso: devenv.exe
+      ruta_contiene: '\2017\'
+    - decir: [configuracion, ajustes]
+      nombre: Configuración
+      proceso: ApplicationFrameHost.exe
+      titulo_contiene: Configuración
+    - decir: [brave, navegador]
+      nombre: Brave
+      proceso: brave.exe
+    - decir: [camara]
+      nombre: Cámara
+      proceso: ApplicationFrameHost.exe
+      titulo_contiene: Cámara
