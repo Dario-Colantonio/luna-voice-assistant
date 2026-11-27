@@ -35,9 +35,15 @@ Luna 1.0 **ejecuta órdenes**: no mantiene conversaciones ni responde preguntas 
 
 ## Cómo funciona
 
-```
-Micrófono → Detector «Che Luna» → Grabación (hasta la pausa) → Transcripción → Intérprete → Comando → Respuesta hablada
-              (Vosk)                                              (Whisper)                                  (Piper)
+```mermaid
+flowchart LR
+    A["Micrófono"] --> B["Detector «Che Luna»<br/>Vosk"]
+    B --> C["Grabación<br/>hasta la pausa"]
+    C --> D["Transcripción<br/>Whisper"]
+    D --> E["Intérprete<br/>RapidFuzz"]
+    E --> F["Comando<br/>en Windows"]
+    F --> G["Respuesta hablada<br/>Piper"]
+    G --> A
 ```
 
 1. **Detector:** Vosk, con una gramática restringida, escucha de forma permanente con muy poco consumo de CPU.
@@ -93,8 +99,8 @@ Luna/
 ## Instalación
 
 ```bat
-git clone https://github.com/[TU-USUARIO]/[NOMBRE-DEL-REPOSITORIO].git
-cd [NOMBRE-DEL-REPOSITORIO]
+git clone https://github.com/Dario-Colantonio/luna-voice-assistant.git
+cd luna-voice-assistant
 
 py -3.11 -m venv .venv
 .venv\Scripts\activate
@@ -175,7 +181,7 @@ Todo está en `config.yaml`:
 
 ## Licencia
 
-**[COMPLETAR: elegir una licencia. Revisar además las licencias de las dependencias y de los modelos.]**
+Proyecto personal publicado como muestra de portfolio. Por ahora no tiene una licencia de uso abierta: todos los derechos reservados. Si te interesa usar o adaptar el código, escribime.
 
 ## Créditos
 
